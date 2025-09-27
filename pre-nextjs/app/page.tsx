@@ -1,23 +1,17 @@
-import { Button } from "@/components/ui/button"
-import { tv } from 'tailwind-variants';
+import HeroSection from "@/components/Home/hero";
+import NewsSection from "@/components/Home/news";
+import AppsSection from "@/components/Home/apps";
+import AboutSection from "@/components/Home/about";
+import { AccessSection } from "@/components/Home/access";
 
 export default function Home() {
-  const twStayles = tv({
-    variants: {
-      style:{
-        text01:'text-cyan-400',
-      },
-    },
-  });
-
   return (
-    <>
-      <div className={twStayles({style:'text01'})}>
-        first_commit
-      </div>
-      <div className="flex min-h-svh flex-col items-center justify-center">
-        <Button>Click me</Button>
-      </div>
-    </>
+    <div>
+      <HeroSection />
+      <AppsSection />
+      <NewsSection />
+      <AboutSection />
+      <AccessSection />
+    </div>
   );
 }
