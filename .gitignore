@@ -1,2 +1,6 @@
 zz_internal_dev
 zz_internal_dev/*
+__pycache__
+__pycache__/*
+*.pyc
+*.env
