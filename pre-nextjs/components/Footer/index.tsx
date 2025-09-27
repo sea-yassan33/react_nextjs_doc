@@ -15,7 +15,7 @@ const footerLinks = {
   service: {
     title: "サービス",
     links: [
-      { label: "運動情報", href: "#" },
+      { label: "運動情報", href: "/execise" },
       { label: "栄養情報", href: "#" },
     ]
   },

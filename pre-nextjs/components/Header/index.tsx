@@ -34,7 +34,7 @@ export default function Header() {
             <Link href="/execise" className={twStayles({style:'header_nav'})}>
               運動情報
             </Link>
-            <Link href="#" className={twStayles({style:'header_nav'})}>
+            <Link href="/nutrition" className={twStayles({style:'header_nav'})}>
               栄養情報
             </Link>
           </nav>

@@ -14,7 +14,8 @@ df = pd.DataFrame([vars(d) for d in list])
 df = df[sample_col]
 ## 日付を文字列に変換
 datastr = datetime.now().strftime('%Y%m%d')
-file_name ='../pre-react/assets/data/'
+file_name_react ='../pre-react/assets/data/'
+file_name_nextjs ='../pre-nextjs/public/data/'
 ## nullは""に置換
 df = df.fillna("")
 ## json用のリストを作成
@@ -32,10 +33,17 @@ for index, row in df.iterrows():
     "created_at": row["created_at"].strftime('%Y-%m-%d %H:%M:%S'),
     "updated_at": row["updated_at"].strftime('%Y-%m-%d %H:%M:%S')
   })
-## jsonファイルに書き換える
+## jsonファイルに書き換える(React)
 ## ディレクトリが存在しない場合は作成
-if not os.path.exists(f'{file_name}'):
-  os.makedirs(f'{file_name}')
 ## jsonファイルに書き出し
-with open(f'{file_name}/sample_data.json', 'w',encoding='utf-8') as f:
+if not os.path.exists(f'{file_name_react}'):
+  os.makedirs(f'{file_name_react}')
+with open(f'{file_name_react}/sample_data.json', 'w',encoding='utf-8') as f:
+    json.dump(json_list, f,ensure_ascii=False, indent=4)
+## jsonファイルに書き換える(Next.js)
+## ディレクトリが存在しない場合は作成
+## jsonファイルに書き出し
+if not os.path.exists(f'{file_name_nextjs}'):
+  os.makedirs(f'{file_name_nextjs}')
+with open(f'{file_name_nextjs}/sample_data.json', 'w',encoding='utf-8') as f:
     json.dump(json_list, f,ensure_ascii=False, indent=4)
