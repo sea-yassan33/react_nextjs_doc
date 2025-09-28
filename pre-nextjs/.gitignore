@@ -40,3 +40,5 @@ yarn-error.log*
 *.tsbuildinfo
 next-env.d.ts
 memo.txt
+# API_propaties
+config/propaties.ts

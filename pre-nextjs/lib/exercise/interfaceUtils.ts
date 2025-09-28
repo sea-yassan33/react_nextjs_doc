@@ -7,7 +7,7 @@ export interface ExerciseRow {
   exerciseTime?: string;
   overveiew?: string;
   videoUrl?: string;
-  created_at: string;
+  create_at: string;
   updated_at: string;
 };
 export type EventKey = 'all'|'walking' | 'running' | 'stretch' | 'circit' | 'dance' | 'yoga';
@@ -20,6 +20,6 @@ export interface ExerciseDetail {
   exerciseTime?: string;
   overveiew?: string;
   videoUrl?: string;
-  created_at: string;
+  create_at: string;
   updated_at: string;
 };

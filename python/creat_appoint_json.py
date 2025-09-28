@@ -28,7 +28,7 @@ for index, row in df.iterrows():
     "reserv_date": row["reserv_date"].strftime('%Y-%m-%d %H:%M:%S'),
     "inquiry_detail": row["inquiry_detail"],
     "delet_flag": row["delet_flag"],
-    "created_at": row["create_at"].strftime('%Y-%m-%d %H:%M:%S'),
+    "create_at": row["create_at"].strftime('%Y-%m-%d %H:%M:%S'),
     "updated_at": row["updated_at"].strftime('%Y-%m-%d %H:%M:%S')
   })
 ## jsonファイルに書き換える(React)

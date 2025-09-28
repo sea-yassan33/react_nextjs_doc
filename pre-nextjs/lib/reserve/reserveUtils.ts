@@ -1,9 +1,10 @@
-export interface Appointment {
+export interface Reservation {
   id: number;
-  start_time: string;
-  customer_id: number;
-  customer_name: string;
-  customer_kana: string;
-  room_id: number;
-  room_name: string;
-}
+  name: string;
+  email: string;
+  reserv_date: string;
+  inquiry_detail: string;
+  delet_flag: number;
+  create_at: string;
+  updated_at: string;
+};

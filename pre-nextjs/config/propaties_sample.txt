@@ -1,0 +1,9 @@
+// config/propaties.ts
+const DOMAIN = 'https://{IP_adress}:1234';
+const API_BASE = `${DOMAIN}/api`;
+const config = {
+  sampleALL: `${API_BASE}/sample/all/`,
+  sampleList: `${API_BASE}/sample/list/`,
+};
+
+export default config;
