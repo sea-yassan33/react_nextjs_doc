@@ -23,7 +23,7 @@ def map_mysql_dtype(col, dtype):
 # Creat table SQL文を生成する関数
 def create_table(df, table_name):
   columns = [map_mysql_dtype(col, dtype) for col, dtype in zip(df.columns, df.dtypes)]
-  create_table_sql = f"CREATE TABLE `{table_name}` (\n  `id` INT AUTO_INCREMENT PRIMARY KEY" + ",\n  " +",\n  ".join(columns) + ",\n  `created_at` DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,\n  `updated_at` DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP\n) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;"
+  create_table_sql = f"CREATE TABLE `{table_name}` (\n  `id` INT AUTO_INCREMENT PRIMARY KEY" + ",\n  " +",\n  ".join(columns) + ",\n  `delet_flag` INT NOT NULL DEFAULT 0,\n  `create_at` DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,\n  `updated_at` DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP\n) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;"
   # INSERT INTO文生成（idは自動採番なので除外）
   insert_sql_list = []
   cols_without_id = [col for col in df.columns if col != 'id']
@@ -124,28 +124,6 @@ def map_mysql_dtype(col, dtype):
     return f"`{col}` DATETIME"
   else:
     return f"`{col}` VARCHAR(255)"
-# Creat table SQL文を生成する関数
-def create_table(df, table_name):
-  columns = [map_mysql_dtype(col, dtype) for col, dtype in zip(df.columns, df.dtypes)]
-  create_table_sql = f"CREATE TABLE `{table_name}` (\n  " + ",\n  ".join(columns) + "\n) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;"
-  # INSERT INTO文生成（idは自動採番なので除外）
-  insert_sql_list = []
-  cols_without_id = [col for col in df.columns if col != 'id']
-  for _, row in df.iterrows():
-    values = []
-    for col in cols_without_id:
-      x = row[col]
-      if isinstance(x, str):
-        values.append(f"'{x}'")
-      elif pd.isna(x):
-        values.append("NULL")
-      elif isinstance(x, pd.Timestamp):
-        values.append(f"'{x.strftime('%Y-%m-%d %H:%M:%S')}'")
-      else:
-        values.append(str(x))
-    insert_sql = f"INSERT INTO `{table_name}` ({', '.join(cols_without_id)}) VALUES ({', '.join(values)});"
-    insert_sql_list.append(insert_sql)
-  return create_table_sql, insert_sql_list
 # カラム定義を解析する関数
 def parse_column(line):
   # 列定義を正規表現で分解
@@ -179,14 +157,16 @@ def convert_to_model(table_name, columns):
   lines.append(f"class {table_name.capitalize()}(Base):")
   lines.append(f"  __tablename__ = '{table_name}'")
   for name, col_type, is_pk in columns:
-    pk = ", primary_key=True" if is_pk else ""
-    lines.append(f"  {name} = Column({col_type}{pk})")
-  # __init__メソッドの自動生成（idと日付系を自動セット）
-  lines.append("  def __init__(self):")
-  lines.append("    self.id = str(uuid.uuid4())")
-  lines.append('    now_data_time = str(datetime.datetime.now().strftime("%Y%m%d%H%M%S"))')
-  lines.append("    self.create_at =  now_data_time")
-  lines.append("    self.update_at =  now_data_time")
+    pk = ", primary_key=True, autoincrement=True" if is_pk else ""
+    # create_at、updated_atの場合、デフォルト値を設定
+    if name == "delet_flag":
+      lines.append(f"  {name} = Column({col_type}, default=0)")
+    elif name == "create_at":
+      lines.append(f"  {name} = Column({col_type}, default=datetime.datetime.now)")
+    elif name == "updated_at":
+      lines.append(f"  {name} = Column({col_type}, default=datetime.datetime.now, onupdate=datetime.datetime.now)")
+    else:
+      lines.append(f"  {name} = Column({col_type}{pk})")
   return "\n".join(lines)
 def create_model_from_sql(sql_file):
   with open(sql_file, encoding="utf-8") as f:

@@ -1,12 +1,9 @@
-CREATE TABLE `exercise_table` (
+CREATE TABLE `reserv_table` (
   `id` INT AUTO_INCREMENT PRIMARY KEY,
   `name` VARCHAR(255),
-  `eventKey` VARCHAR(255),
-  `eventLabel` VARCHAR(255),
-  `exerciseTime` VARCHAR(255),
-  `overveiew` VARCHAR(255),
-  `youtubeID` VARCHAR(255),
-  `videoUrl` VARCHAR(255),
+  `email` VARCHAR(255),
+  `reserv_date` DATETIME,
+  `inquiry_detail` VARCHAR(255),
   `delet_flag` INT NOT NULL DEFAULT 0,
   `create_at` DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
   `updated_at` DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
