@@ -5,7 +5,7 @@ from datetime import datetime
 import pandas as pd
 import json
 import os
-sample_col=['id','name','eventKey','eventLabel','exerciseTime','overveiew','youtubeID',"created_at","updated_at"]
+sample_col=['id','name','eventKey','eventLabel','exerciseTime','overveiew','youtubeID','delet_flag','create_at','updated_at']
 session = databases.create_new_session()
 list = session.query(models.Exercise_table).all()
 ## df作成
@@ -30,7 +30,8 @@ for index, row in df.iterrows():
     "exerciseTime": row["exerciseTime"],
     "overveiew": row["overveiew"],
     "videoUrl": youtube_url,
-    "created_at": row["created_at"].strftime('%Y-%m-%d %H:%M:%S'),
+    "delet_flag": row["delet_flag"],
+    "create_at": row["create_at"].strftime('%Y-%m-%d %H:%M:%S'),
     "updated_at": row["updated_at"].strftime('%Y-%m-%d %H:%M:%S')
   })
 ## jsonファイルに書き換える(React)

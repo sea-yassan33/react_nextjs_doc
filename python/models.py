@@ -18,7 +18,8 @@ class Exercise_table(Base):
   overveiew = Column(VARCHAR(255))
   youtubeID = Column(VARCHAR(255))
   videoUrl = Column(VARCHAR(255))
-  created_at = Column(DATETIME, default=datetime.datetime.now)
+  delet_flag = Column(Integer, default=0)
+  create_at = Column(DATETIME, default=datetime.datetime.now)
   updated_at = Column(DATETIME, default=datetime.datetime.now, onupdate=datetime.datetime.now)
 ## Reserv_tableモデルクラスの定義
 class Reserv_table(Base):
