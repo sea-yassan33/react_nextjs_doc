@@ -13,9 +13,9 @@ const apps = [
   },
   {
     icon: Dumbbell,
-    title: "栄養情報",
-    description: "バランスの取れた食事プランを提案します。",
-    link: "/nutrition",
+    title: "トピック情報",
+    description: "文章コンテンツ形式で情報を提供します。",
+    link: "/topic",
     image: "/img/home/img01.jpg",
   },
   {
