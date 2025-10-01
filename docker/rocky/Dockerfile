@@ -21,3 +21,6 @@ RUN python3.9 -m pip install -r requirements.txt
 
 # 環境変数の指定
 ENV DOCKER_TEST=docer-test
+
+# Vite用 (5173) と Next.js/CRA用 (3000)
+EXPOSE 5173 3000
