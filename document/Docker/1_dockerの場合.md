@@ -18,7 +18,6 @@ docker ps
 docker start rocky-nextjs-python
 ## コンテナ停止
 docker stop rocky-nextjs-python
-
 ```
 
 
