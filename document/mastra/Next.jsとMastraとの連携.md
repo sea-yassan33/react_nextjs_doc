@@ -16,7 +16,6 @@ $ npx create-next-app@15.5.4
 √ Would you like to use App Router? (recommended) ...  / Yes
 √ Would you like to use Turbopack? (recommended) ... / Yes
 √ Would you like to customize the import alias (`@/*` by default)? ... No /
-Creating a new Next.js app in C:\dev\AI\ai_agent_project\Project\mastra\mastra-nextjs.
 
 ## プロジェクト内に移動
 cd mastra-nextjs
@@ -68,7 +67,7 @@ cp .env.example .env
 ```
 
 ```sh
-[.enc.example]
+[.env]
 GOOGLE_GENERATIVE_AI_API_KEY=your-api-key
 ```
 
@@ -100,6 +99,7 @@ npm run msdev
 
 ### actions.tsファイルを作成
 - [./src/lib/actions.ts](../../mastra/mastra-nextjs/src/lib/actions.ts)
+- Mastraと通信の基盤も含めて作成
 
 ```ts
 "use server";
@@ -121,7 +121,6 @@ export async function getCookingInfo(prevState: unknown, formData: FormData) {
 ```
 
 ### CookingFormコンポーネントを作成
-- Mastraと通信の基盤も含めて作成
 - ユーザーが食材を入力した後にgetCookingInfoアクションを呼び出す仕組み
 
 - [./src./components/cookingForm.tsx](../../mastra/mastra-nextjs/src/components/cookingForm.tsx)
