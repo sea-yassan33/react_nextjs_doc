@@ -31,7 +31,7 @@ http://localhost:3000 にアクセスして、Next.jsのウェルカムページ
 ```sh
 mkdir -p public/img
 mkdir -p public/data
-mkdir -p app/components
+mkdir -p components
 ```
 
 - 追加ライブラリ

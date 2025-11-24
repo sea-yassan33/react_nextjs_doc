@@ -42,7 +42,21 @@ const DocumentDetail = () => {
 
         </header>
         <section className="prose max-w">
-          <Markdown remarkPlugins={[remarkGfm]} rehypePlugins={[rehypeHighlight]}>
+          <Markdown 
+            remarkPlugins={[remarkGfm]}
+            rehypePlugins={[rehypeHighlight]}
+            components={{
+              a: ({ node, ...props }) => (
+                <a
+                  {...props}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                  {props.children}
+                </a>
+              ),
+            }}
+          >
             {document.content}
           </Markdown>
         </section>
