@@ -1,7 +1,7 @@
 # Next_jsのプロジェクト立ち上げ方法
 
 ```sh
-npx create-next-app@latest
+npx create-next-app@15.5.4
 
 Need to install the following packages:
 create-next-app@15.5.4
