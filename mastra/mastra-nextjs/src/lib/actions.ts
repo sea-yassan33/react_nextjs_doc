@@ -5,7 +5,7 @@ import { mastra } from "@/mastra";
 export async function getCookingInfo(prevState: unknown, formData: FormData) {
   const recipe = JSON.parse(formData.get("recipe") as string);
   const agent = mastra.getAgent("CookingAgent");
-  const prompt = `${recipe}のレシピを考えて下さい ` 
+  const prompt = `${recipe}のレシピを考えて下さい。 ` 
   const result = await agent.generate(prompt);
 
   return {
