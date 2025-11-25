@@ -2,6 +2,12 @@
 
 import { useState, useEffect, useActionState, startTransition } from "react";
 import { getCookingInfo } from "@/lib/actions";
+import { Button } from "@/components/ui/button";
+import { Input } from "@/components/ui/input";
+import { Card, CardContent } from "@/components/ui/card";
+import Markdown from 'react-markdown';
+import rehypeHighlight from "rehype-highlight";
+import remarkGfm from 'remark-gfm';
 
 export function CookingForm() {
   const [recipe, setrecipe] = useState("");
@@ -31,37 +37,58 @@ export function CookingForm() {
     });
   };
   return (
-    <div className="w-full max-w-3xl">
-      <form onSubmit={handleSubmit} className="w-full max-w-md mb-8">
-        <div className="flex flex-col sm:flex-row gap-4">
-          <input
-            type="text"
-            value={recipe}
-            onChange={(e) => setrecipe(e.target.value)}
-            placeholder="食材名を入力"
-            className="flex-grow px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
-            required
-          />
-          <button
-            type="submit"
-            disabled={isPending}
-            className="px-6 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 disabled:oparecipe-50"
-          >
-            {isPending ? "読み込み中..." : "レシピを作る"}
-          </button>
-        </div>
-      </form>
-      <div className="w-full flex flex-col md:flex-row gap-6">
-        {result && (
-          <div className="p-6 bg-white dark:bg-gray-800 rounded-lg shadow-md">
-            <h2 className="text-xl font-semibold mb-4">
-              {recipe || "該当食材"}のレシピ
-            </h2>
-            <div className="whitespace-pre-wrap">{result}</div>
+    <Card className="w-full shadow-xl bg-white/70 backdrop-blur-md">
+      <CardContent className="p-6 flex flex-col gap-1">
+        <form onSubmit={handleSubmit} className="">
+          <h1 className="text-2xl font-semibold text-center text-orange-700" >料理メニュー入力</h1>
+          <div className="flex flex-col items-center">
+            <Input
+              type="text"
+              value={recipe}
+              onChange={(e) => setrecipe(e.target.value)}
+              placeholder="食材名を入力"
+              className="bg-white md:w-[30%] text-center my-5"
+              required
+            />
+            <Button
+              type="submit"
+              disabled={isPending}
+              className="bg-orange-600 hover:bg-orange-700 text-white md:w-[30%] text-center"
+            >
+              {isPending ? "読み込み中..." : "レシピを作る"}
+            </Button>
           </div>
-        )}
-      </div>
-    </div>
+        </form>
+        <div className="mt-4 p-4 bg-orange-50 rounded-xl border border-orange-200 text-orange-900">
+          {result && (
+            <div className="">
+              <h2 className="text-xl font-semibold mb-4">
+                {recipe || "該当食材"}のレシピ
+              </h2>
+              <div className="prose">
+                <Markdown
+                  remarkPlugins={[remarkGfm]}
+                  rehypePlugins={[rehypeHighlight]}
+                  components={{
+                    a: ({ ...props }) => (
+                      <a
+                        {...props}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                      >
+                        {props.children}
+                      </a>
+                    ),
+                  }}
+                >
+                  {result}
+                </Markdown>
+              </div>
+            </div>
+          )}
+        </div>
+      </CardContent>
+    </Card>
   );
 }
 
