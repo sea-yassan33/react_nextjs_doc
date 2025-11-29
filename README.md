@@ -16,3 +16,4 @@
   - [Dockerfile](./docker/rocky/Dockerfile)
   - [requirements.txt](./docker/rocky/requirements.txt)
 - [FastAPIについて](./document/Python/1_FastAPIについて.md)
+- [LangChain・LangGraphについて](./document/Python/2_Lang_chain_graphについて.md)
