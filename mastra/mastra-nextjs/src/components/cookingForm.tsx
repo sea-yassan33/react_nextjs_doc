@@ -91,4 +91,3 @@ export function CookingForm() {
     </Card>
   );
 }
-

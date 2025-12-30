@@ -1,8 +1,10 @@
-import { google } from '@ai-sdk/google';
+//import { initializeGoogleClient } from "@/lib/google-client";
 import { Agent } from "@mastra/core/agent";
 import { Memory } from '@mastra/memory';
 import { LibSQLStore } from '@mastra/libsql';
 import path from 'path';
+
+//const googlClient = initializeGoogleClient();
 
 export const CookingAgent = new Agent({
   name: "Cooking Agent",
@@ -37,12 +39,9 @@ export const CookingAgent = new Agent({
 - 調理知識がない場合の思い込みでの回答
 - 特定のブランドや商品の宣伝
 
-#回答方法
-- markDown形式でお願いします。
-
 ユーザーからの情報が不足している場合は、適切な質問をして必要な情報を引き出してください。常に実用的で美味しく、作る喜びを感じられるレシピを提案することを心がけてください。
 `,
-  model: google('gemini-2.5-flash'),
+  model: 'google/gemini-2.5-flash',
   memory: new Memory({
     storage: new LibSQLStore({
       url: `file:${path.resolve(process.cwd(), 'mastra.db')}`

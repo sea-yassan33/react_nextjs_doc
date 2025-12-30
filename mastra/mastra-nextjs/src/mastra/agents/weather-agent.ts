@@ -2,7 +2,6 @@ import { Agent } from '@mastra/core/agent';
 import { Memory } from '@mastra/memory';
 import { LibSQLStore } from '@mastra/libsql';
 import { weatherTool } from '../tools/weather-tool';
-import { google } from '@ai-sdk/google';
 import path from 'path';
 
 export const weatherAgent = new Agent({
@@ -21,7 +20,7 @@ export const weatherAgent = new Agent({
 
       Use the weatherTool to fetch current weather data.
 `,
-  model: google('gemini-2.5-flash'),
+  model: 'google/gemini-2.5-flash',
   tools: { weatherTool },
 
   memory: new Memory({

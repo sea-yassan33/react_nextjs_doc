@@ -1,11 +1,11 @@
 
 import { Mastra } from '@mastra/core/mastra';
+//import { createLogger } from "@mastra/core/logger";
 import { PinoLogger } from '@mastra/loggers';
+import { CookingAgent } from "./agents/cooking-agents";
 import { LibSQLStore } from '@mastra/libsql';
 import { weatherWorkflow } from './workflows/weather-workflow';
 import { weatherAgent } from './agents/weather-agent';
-import { CookingAgent } from "./agents/cooking-agents";
-
 
 export const mastra = new Mastra({
   workflows: { weatherWorkflow },
@@ -19,8 +19,8 @@ export const mastra = new Mastra({
     level: 'info',
   }),
   telemetry: {
-    // Telemetry is deprecated and will be removed in the Nov 4th release
-    enabled: false, 
+    // serviceName: "ai",
+    enabled: false,
   },
   observability: {
     // Enables DefaultExporter and CloudExporter for AI tracing
